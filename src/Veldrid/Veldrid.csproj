@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>$(BinDir)\$(AssemblyName).xml</DocumentationFile>
     <NoWarn Condition="'$(Configuration)' == 'Debug'">1591</NoWarn>
@@ -10,7 +9,8 @@
     <DefineConstants Condition="'$(ExcludeVulkan)' == 'true'">$(DefineConstants);EXCLUDE_VULKAN_BACKEND</DefineConstants>
     <DefineConstants Condition="'$(ExcludeMetal)' == 'true'">$(DefineConstants);EXCLUDE_METAL_BACKEND</DefineConstants>
     <DefineConstants Condition="'$(ExcludeOpenGL)' == 'true'">$(DefineConstants);EXCLUDE_OPENGL_BACKEND</DefineConstants>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>14</LangVersion>
+    <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
@@ -26,8 +26,7 @@
 
     <PackageReference Include="Vortice.D3DCompiler" Version="$(VorticeWindowsVersion)" Condition="'$(ExcludeD3D11)' != 'true'" />
     <PackageReference Include="Vortice.Direct3D11" Version="$(VorticeWindowsVersion)" Condition="'$(ExcludeD3D11)' != 'true'" />
-
-    <ProjectReference Include="..\Veldrid.MetalBindings\Veldrid.MetalBindings.csproj" Condition="'$(ExcludeMetal)' != 'true'" />
+    <ProjectReference Include="..\Veldrid.MetalBindings\Veldrid.MetalBindings.csproj" />
 
     <ProjectReference Include="..\Veldrid.OpenGLBindings\Veldrid.OpenGLBindings.csproj" Condition="'$(ExcludeOpenGL)' != 'true'" />
   </ItemGroup>
